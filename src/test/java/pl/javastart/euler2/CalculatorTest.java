@@ -1,48 +1,60 @@
 package pl.javastart.euler2;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
 
-    @Mock
-    private Calculator calculator;
-    private static final int SUM_LIMIT = 4_000_000;
-    private int sum;
+    private final Calculator calculator = new Calculator();
 
-    @BeforeEach
-    void init() {
-        calculator = new Calculator();
-        List<Integer> list = calculator.fibonacciSequence();
-        sum = calculator.sumOfFibonacciSequence(list);
+    @Test
+    public void shouldReturn0ForValue0() {
+        // given
+        int value = 0;
+        // when
+        int sumOfFibonacciSequence = calculator.fibonacciSequence(value);
+        //then
+        assertEquals(0, sumOfFibonacciSequence);
     }
 
     @Test
-    public void sumShouldNotBeNull() {
+    public void shouldReturnSum10ForValue10() {
         // given
+        int value = 10;
         // when
+        int sumOfFibonacciSequence = calculator.fibonacciSequence(value);
         //then
-        assertNotEquals("Suma ciągu fibonacciego nie jest obliczana prawidłowo", 0, sum);
+        assertEquals(10, sumOfFibonacciSequence);
     }
 
     @Test
-    public void shouldReturnSumLowerThan4Millions() {
+    public void shouldReturnSum44ForValue10() {
         // given
+        int value = 34;
         // when
+        int sumOfFibonacciSequence = calculator.fibonacciSequence(value);
         //then
-        assertTrue("Suma jest większa niż dopuszczalny limit", sum < SUM_LIMIT);
+        assertEquals(44, sumOfFibonacciSequence);
     }
 
     @Test
-    public void shouldReturnEvenSum() {
+    public void shouldReturnSum188ForNotEvenValue65() {
         // given
+        int value = 65;
         // when
+        int sumOfFibonacciSequence = calculator.fibonacciSequence(value);
         //then
-        assertEquals("Suma nie jest parzysta", 0, sum % 2);
+        assertEquals(188, sumOfFibonacciSequence);
+    }
+
+    @Test
+    public void shouldReturnSum4613732ForValue4000000() {
+        // given
+        int value = 4000000;
+        // when
+        int sumOfFibonacciSequence = calculator.fibonacciSequence(value);
+        //then
+        assertEquals(4613732, sumOfFibonacciSequence);
     }
 }
